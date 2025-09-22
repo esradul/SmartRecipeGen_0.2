@@ -1,0 +1,274 @@
+You are a production level webapp maker.use all framework,pacakegs,nodejs and all thing most safe bag and error free and ready for production.now,Create a new Next.js application named "ai inbox manager", which functions as a real-time content moderation dashboard and workflow tool, connecting to a user-provided Supabase database.
+________________________________________
+1. 🛠️ Core Technology & Setup
+•	Framework: Next.js (App Router)
+•	Language: TypeScript
+•	UI Library: ShadCN UI
+•	Styling: Tailwind CSS
+•	Icons: lucide-react
+•	Responsiveness: Fully responsive (mobile and desktop)
+________________________________________
+2. 🎨 Styling & Theme
+•	Primary Color: Moderate blue #5DADE2
+•	Background Color: Very light, airy blue #EBF5FB
+•	Accent Color: Vibrant orange #F39C12
+•	Font: 'Inter', sans-serif
+•	Configure these in src/app/globals.css using HSL CSS variables for ShadCN theming.
+
+Login page-----
+
+
+Build a React + Tailwind sign in page that authenticates via Supabase.
+Requirements:
+1. Only **Sign In option** (no Sign Up).
+2. Users are manually created in Supabase dashboard.
+3. Authentication method: **Email + Password only**.
+4. Use **Supabase JavaScript client (@supabase/supabase-js)** (via CDN).
+5. If the user successfully signs in → redirect them to the homepage `/`.
+6. If login fails → show error message on the page.
+7. Page should be responsive and centered, with a clean minimal design.
+8. Include a check: If the user is already logged in (has an active session), redirect them straight to `/` without showing the login form.
+NEXT_PUBLIC_SUPABASE_URL=https://cwbghsfluthuyuvjmqsn.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN3Ymdoc2ZsdXRodXl1dmptcXNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5MTYxNjUsImV4cCI6MjA3MzQ5MjE2NX0.TDMn5GPS6535ACyRPDvqDjS2rmElCOlEx2nzj-0evek
+
+these is only for Authentication.in Supabase Integration part you take another supabase url and anon key from user for access table.
+________________________________________
+3. 🔌 Supabase Integration
+•	Create a SupabaseProvider context:
+o	Manage: Supabase URL, secret key, table name
+o	Store credentials in localStorage
+•	Configuration Dialog:
+o	Accessed via User Profile icon 
+o	Allows input/save/update of Supabase credentials
+•	Disconnect:
+o	Button in user menu
+o	Clears credentials from localStorage and disconnects Supabase client
+•	All data-dependent pages:
+o	Handle unconfigured Supabase gracefully
+o	Display message prompting configuration
+________________________________________
+4. 🧭 Layout & Navigation
+•	Layout:
+o	Fixed left sidebar for navigation
+o	Main content area on the right
+•	Sidebar Links (with icons and labels):
+o	Monitoring (Home icon)
+o	SendGuard (ShieldCheck icon)
+o	Manual Reply (MessageSquare icon)
+o	Escalation (AlertTriangle icon)
+o	Important (Star icon)
+•	Header User Profile Menu (Dropdown):
+o	Configuration (Generic settings gear icon)
+o	Data Recovery (Trash2 icon)
+o	Disconnect (LogOut icon)
+o	Settings (sliders icon)/ will have dark and light mode
+•	Highlight active navigation links.
+________________________________________
+5. 📊 Feature: Monitoring Dashboard (/)
+#### Time Filter Controls
+- **Date Range Selector**:
+  - Predefined options: Last 24 hours, Last 7 days, Last 30 days, Last 90 days
+  - Custom date range with full flexibility:
+    - Start date and time picker
+    - End date and time picker
+    - Support for any historical date range (no restrictions on how far back)
+    - Ability to select ranges spanning minutes, hours, days, months, or years
+    - Time zone selection/awareness
+    - Quick time presets within custom range (e.g., "This week", "Last month", "This year", "Last year")
+- **Real-time Toggle**: Option to enable/disable real-time updates
+- Filters apply to both pie charts  and Comparison Graph simultaneously
+ 
+Metrics:
+o	Total
+o	Message Sent
+o	Approval
+o	Objection
+o	Manual Handle
+o	Replied
+o	Escalation
+o	Cancel
+o	Important
+o	Bookcall
+o	Waiting
+Pie Charts
+•	Permission Status Pie Chart
+o	Categories: Approval, Objection, Manual Handle
+•	Overall Status Pie Chart
+o	Categories: Escalation = TRUE, Cancel, Important = TRUE, Bookcall = TRUE,
+Each chart slice shows absolute count + percentage, filtered by the selected time range. Charts update live (if toggle is on).
+
+• Comparison Graph:
+Create a dashboard component to compare company activities over two different time ranges. The component should include:
+•	Purpose: Visual comparison of one or more selected company performance metrics (e.g., Approval , Objection, Manual Handle) across two user-defined date 
+•	User Flow:
+o	Metric Selector: Multi-select dropdown (default to “Total”).
+o	Date Range Pickers:
+•	  - Predefined options: Last 24 hours, Last 7 days, Last 30 days, Last 90 days
+•	  - Custom date range with full flexibility:
+o	Generate Button: On click, fetch data. Display loading skeletons until both datasets are loaded.
+•	Visualization:
+o	Use either dual-line chart or grouped bar chart.
+o	Hover tooltips show:
+	Actual values
+	Absolute difference
+	% change
+•	Metric Summary Badges:
+o	Display for each selected metric
+o	Show delta (positive/negative) and relative percentage change.
+•	Real-time Toggle:
+o	Inherits from the dashboard-level setting.
+o	When enabled, both ranges auto-refresh in real time using Supabase or live data stream.
+•	Toggle Control:
+o	Global switch to Enable/Disable real-time updates across all charts, cards, and comparison graphs.
+________________________________________
+6. 🛡️ Feature: SendGuard Workflow (/sendguard)
+•	Filter:
+(permission = 'Waiting' AND removed = false) OR (permission = 'Objection' AND Objection_nai = true AND removed = false)
+•	What is in permission column that should be not visible fields 
+•	SendGuardCard Fields:all fields come sequencly line by line
+•	If feedback column is have any text that will be show in different style top of all content
+o	when image column is false  follow this sequence --- Previous_Emails_Summary,email_subject, Customer_Email,thought_process, draft_reply  with editable textarea, and save changes back to the same document on button click or auto-save and CRM_notes (accordion)
+1.	When image column is true   follow this sequence --- Previous_Emails_Summary,email_subject, Customer_Email, Images (fetched from Supabase bucket; see Image Handling below),thought_process, draft_reply  with editable textarea, and save changes back to the same document on button click or auto-save and CRM_notes (accordion)
+•	Action Selection Dropdown: Options:
+o	Approval
+o	Objection
+o	Manual Handle
+•	Selection updates the permission column
+•	Feedback Text Field (Conditional):
+o	Appears only when Objection or Manual Handle is selected
+o	Required for these selections
+o	Saves to the feedback column
+Business Logic
+•	Approval:
+o	Updates permission to "Approval"
+o	No feedback required
+o	Feedback field hidden
+o	Record processed immediately
+•	I need a one button called “cancel”when I click it will save in permission column and delete from sendguard option.
+•	When I click Objection it will counted in edited column.if column has any number then I click objection that time add one with that.if their previously has no number or 0 add 1 then next time 2 this way.next if any content come with edited column any number without 0 that will show aline with content this mean this is edited this time.if that is 0 no need to show anything
+•	Objection / Manual Handle:
+o	Feedback field becomes visible and mandatory
+o	Updates both permission and feedback columns
+o	Cannot proceed without feedback text
+Data Updates
+•	Real-time synchronization with Supabase
+•	Processed records (non-null permission) removed from the queue
+New records with null permission appear automatically________________________________________
+7. ✍️ Feature: Manual Reply Workflow (/manual-reply)
+•	Filter:
+permission = 'Manual Handle' AND replied = false AND removed = false
+•	ManualReplyCard Fields: all fields come sequencly line by line
+•	If feedback column is have any text that will be show in different style top of all content
+o	When image column is false  follow this sequence --- Previous_Emails_Summary,email_subject, Customer_Email, CRM_notes (accordion)
+o	textarea for human_reply, human_name(optional)
+o	When image column is true  follow this sequence --- Previous_Emails_Summary,email_subject, Customer_Email,Images (fetched from Supabase bucket; see Image Handling below),CRM_notes (accordion),textarea for human_reply, input for human_name(optional)
+
+
+•	Actions:
+o	Submit Response → saves data, sets replied = true
+o	Remove → sets removed = true (soft delete)
+________________________________________
+8. 🚨 Feature: Escalation Workflow (/escalation)
+•	Filter:
+escalation = true AND Escalated_replied = false AND removed = false
+•	EscalationCard Fields: all fields come sequencly line by line
+o	When image column is false follow this sequence --- Previous_Emails_Summary,email_subject, Customer_Email, Images (fetched from Supabase bucket; see Image Handling below),reasoning,CRM_notes (accordion) ,textarea for Escalated_reply, input for human_name(optional)
+
+o	When image column is true follow this sequence --- Previous_Emails_Summary,email_subject, Customer_Email, Images (fetched from Supabase bucket; see Image Handling below),reasoning,CRM_notes (accordion), textarea for Escalated_reply, input for human_name(optional)
+
+•	Actions:
+o	Submit → saves to Escalated_reply, sets Escalated_replied = true
+o	Remove → sets removed = true (soft delete)
+________________________________________
+•  Image Handling (When image column is "true"): 
+•	Fetch image URLs from the image_url column (array of strings, e.g., ["https://jrzaobrqnsmcsaagbwyi.supabase.co/storage/v1/object/public/email-images/path/to/uploads/attachment_0","https://jrzaobrqnsmcsaagbwyi.supabase.co/storage/v1/object/public/email-images/path/to/uploads/attachment_1","https://jrzaobrqnsmcsaagbwyi.supabase.co/storage/v1/object/public/email-images/path/to/uploads/attachment_2","https://jrzaobrqnsmcsaagbwyi.supabase.co/storage/v1/object/public/email-images/path/to/uploads/attachment_3","https://jrzaobrqnsmcsaagbwyi.supabase.co/storage/v1/object/public/email-images/path/to/uploads/attachment_4"]).
+•	Download images from Supabase storage bucket using signed URLs for security (generate via Supabase client).
+•	Display under "Customer_Email" in a story-style carousel (like Messenger/WhatsApp): 
+o	Use a library like react-responsive-carousel or custom ShadCN components for left/right navigation.
+o	Support zoom in/out on images (e.g., using react-zoom-pan-pinch or native pinch-zoom).
+o	Only images are zoomable; other content remains static.
+•  Data Updates & Real-Time Sync: 
+•	Use Supabase's real-time subscriptions (via supabase.realtime) to listen for changes in the table.
+•	Automatically refresh the list on inserts/updates/deletes matching the filter.
+•	Handle errors gracefully (e.g., retries, offline detection).
+Ensure all updates are atomic and use Supabase's upsert/modify methods 
+9. ⭐ Feature: Important Workflow (/important)
+•	Filter:
+important = true AND Important_replied = false AND removed = false
+•	ImportantCard Fields:
+o	When image column is true follow this sequence Previous_Emails_Summary,email_subject, Customer_Email, Images (fetched from Supabase bucket; see Image Handling below),CRM_notes (accordion), textarea for Important_reply, input for human_name(optional)
+•	
+•	When image column is false follow this sequence Previous_Emails_Summary,email_subject, Customer_Email, CRM_notes (accordion), textarea for Important_reply, input for human_name(optional)
+•	
+
+•	Actions:
+o	Submit → saves to Important_reply, sets Important_replied = true
+o	Remove → sets removed = true (soft delete)
+________________________________________
+10. ♻️ Feature: Data Recovery (/recovery)
+•	Access: via user dropdown menu
+•	Filter:
+permission = 'Cancel' OR removed = true
+•	UI:
+o	Same time-range filter as dashboard
+o	Use RecoveryCard to display:
+	Key details + status (Canceled / Removed)
+•	Actions:
+o	Restore:
+	Sets removed = false, permission = 'Waiting'
+	Returns item to SendGuard queue
+o	Delete Permanently:
+	Confirmation required
+	Deletes record permanently
+	This button must be before Restore
+________________________________________
+11. 🧩 Component & Code Quality
+•	Create reusable ContentWorkflow component for:
+o	Fetching
+o	Filtering
+o	Loading states
+o	Real-time logic for all workflows
+•	Use custom useToast hook for all notifications
+•	Ensure:
+o	All queries exclude removed = true (except Data Recovery)
+o	All cards show email_subject at the top
+o	Maintain clean, well-organized, maintainable code
+
+Supabase table schema----- create table public.n8n to supabase (
+  id bigint generated by default as identity not null,
+  created_at timestamp with time zone not null default now(),
+  hubspot_crm_id text null,
+  thread_id text null,
+  email text null,
+  permission text null,
+  feedback text null,
+  human_reply text null,
+  escalation boolean null,
+  "Escalated_reply" text null,
+  human_name text null,
+  draft_reply text null,
+  message_sent boolean null,
+  edited numeric null,
+  "Customer_Email" text null,
+  "Previous_Emails_Summary" text null,
+  reasoning text null,
+  thought_process text null,
+  "Availabilities" text null,
+  "CRM_notes" text null,
+  bookcall boolean null,
+  "Important_reply" text null,
+  important boolean null,
+  customer_name text null,
+  replied boolean null,
+  email_subject text null,
+  "Escalated_replied" boolean null,
+  "Important_replied" boolean null,
+  removed boolean null,
+  from_knowledgebase text null,
+  "Objection_nai" boolean null,
+  image boolean null,
+  image_url text null,
+  image_analysis text null,
+  constraint n8n to supabase_pkey primary key (id)
+) TABLESPACE pg_default;
+
