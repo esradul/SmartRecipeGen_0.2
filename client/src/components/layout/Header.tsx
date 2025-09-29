@@ -55,13 +55,13 @@ export function Header({ title, lastUpdated }: HeaderProps) {
 
   return (
     <>
-      <header className="bg-card border-b border-border px-6 py-4 flex items-center justify-between" data-testid="header">
-        <div className="flex items-center space-x-4">
-          <h2 className="text-2xl font-semibold text-foreground" data-testid="text-page-title">
+      <header className="bg-card border-b border-border px-4 lg:px-6 py-3 lg:py-4 flex items-center justify-between" data-testid="header">
+        <div className="flex items-center space-x-2 lg:space-x-4 min-w-0">
+          <h2 className="text-lg lg:text-2xl font-semibold text-foreground truncate" data-testid="text-page-title">
             {title}
           </h2>
           {lastUpdated && (
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+            <div className="hidden md:flex items-center space-x-2 text-sm text-muted-foreground">
               <span>Last updated: <span data-testid="text-last-updated">{lastUpdated}</span></span>
             </div>
           )}
@@ -69,11 +69,11 @@ export function Header({ title, lastUpdated }: HeaderProps) {
         
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="flex items-center space-x-3" data-testid="button-user-menu">
-              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+            <Button variant="ghost" className="flex items-center space-x-2 lg:space-x-3 shrink-0" data-testid="button-user-menu">
+              <div className="w-6 h-6 lg:w-8 lg:h-8 bg-primary rounded-full flex items-center justify-center">
                 <User className="text-primary-foreground" size={16} />
               </div>
-              <span className="text-sm font-medium">admin@example.com</span>
+              <span className="hidden lg:inline text-sm font-medium">admin@example.com</span>
             </Button>
           </DropdownMenuTrigger>
           

@@ -62,14 +62,14 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-background p-4" data-testid="login-page">
+    <div className="min-h-screen w-full flex items-center justify-center bg-background p-4 sm:p-6 lg:p-8" data-testid="login-page">
       <Card className="w-full max-w-md">
-        <CardHeader className="text-center space-y-4">
-          <div className="mx-auto w-16 h-16 bg-primary rounded-lg flex items-center justify-center">
-            <Bot className="text-primary-foreground" size={32} />
+        <CardHeader className="text-center space-y-4 p-4 sm:p-6">
+          <div className="mx-auto w-12 h-12 sm:w-16 sm:h-16 bg-primary rounded-lg flex items-center justify-center">
+            <Bot className="text-primary-foreground" size={24} />
           </div>
           <div>
-            <CardTitle className="text-2xl font-semibold" data-testid="text-login-title">
+            <CardTitle className="text-xl sm:text-2xl font-semibold" data-testid="text-login-title">
               AI Inbox Manager
             </CardTitle>
             <p className="text-muted-foreground text-sm mt-2">
@@ -78,7 +78,7 @@ export default function Login() {
           </div>
         </CardHeader>
 
-        <CardContent>
+        <CardContent className="p-4 sm:p-6">
           {error && (
             <Alert variant="destructive" className="mb-6" data-testid="alert-login-error">
               <AlertCircle className="h-4 w-4" />

@@ -78,13 +78,13 @@ export function TimeFilter({
 
   return (
     <Card data-testid="card-time-filter">
-      <CardContent className="p-6">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
-          <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+      <CardContent className="p-4 lg:p-6">
+        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between space-y-4 xl:space-y-0">
+          <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
             <div>
               <Label className="text-sm font-medium text-foreground">Time Range</Label>
               <Select value={preset} onValueChange={handlePresetChange}>
-                <SelectTrigger className="w-48 mt-2" data-testid="select-time-range">
+                <SelectTrigger className="w-full md:w-48 mt-2" data-testid="select-time-range">
                   <SelectValue placeholder="Select time range" />
                 </SelectTrigger>
                 <SelectContent>
@@ -98,14 +98,14 @@ export function TimeFilter({
             </div>
             
             {preset === 'custom' && (
-              <>
+              <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
                 <div>
                   <Label className="text-sm font-medium text-foreground">Start Date</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-48 mt-2 justify-start text-left font-normal"
+                        className="w-full sm:w-48 mt-2 justify-start text-left font-normal"
                         data-testid="button-start-date"
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
@@ -129,7 +129,7 @@ export function TimeFilter({
                     <PopoverTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-48 mt-2 justify-start text-left font-normal"
+                        className="w-full sm:w-48 mt-2 justify-start text-left font-normal"
                         data-testid="button-end-date"
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
@@ -146,19 +146,19 @@ export function TimeFilter({
                     </PopoverContent>
                   </Popover>
                 </div>
-              </>
+              </div>
             )}
           </div>
           
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="flex items-center space-x-2 w-full sm:w-auto">
               <Switch
                 id="realtime-toggle"
                 checked={realTimeEnabled}
                 onCheckedChange={onRealTimeToggle}
                 data-testid="switch-realtime"
               />
-              <Label htmlFor="realtime-toggle" className="text-sm font-medium">
+              <Label htmlFor="realtime-toggle" className="text-sm font-medium whitespace-nowrap">
                 Real-time updates
               </Label>
             </div>
@@ -167,7 +167,7 @@ export function TimeFilter({
                 // Force refresh - in a real app you might want to trigger a manual refetch
                 window.location.reload();
               }}
-              className="px-4 py-2"
+              className="px-4 py-2 w-full sm:w-auto"
               data-testid="button-apply-filters"
             >
               Apply Filters

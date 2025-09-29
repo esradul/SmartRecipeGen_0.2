@@ -82,11 +82,11 @@ export function ComparisonGraph({ isLoading }: ComparisonGraphProps) {
   return (
     <Card data-testid="card-comparison-graph">
       <CardHeader>
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6">
-          <CardTitle className="mb-4 lg:mb-0">Performance Comparison</CardTitle>
-          <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between mb-6">
+          <CardTitle className="mb-4 xl:mb-0">Performance Comparison</CardTitle>
+          <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-4">
             <Select value={selectedMetric} onValueChange={setSelectedMetric}>
-              <SelectTrigger className="w-48" data-testid="select-comparison-metric">
+              <SelectTrigger className="w-full md:w-48" data-testid="select-comparison-metric">
                 <SelectValue placeholder="Select metric" />
               </SelectTrigger>
               <SelectContent>
@@ -98,7 +98,7 @@ export function ComparisonGraph({ isLoading }: ComparisonGraphProps) {
               </SelectContent>
             </Select>
             <Select value={chartType} onValueChange={(value: 'line' | 'bar') => setChartType(value)}>
-              <SelectTrigger className="w-32" data-testid="select-chart-type">
+              <SelectTrigger className="w-full md:w-32" data-testid="select-chart-type">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -106,7 +106,7 @@ export function ComparisonGraph({ isLoading }: ComparisonGraphProps) {
                 <SelectItem value="bar">Bar Chart</SelectItem>
               </SelectContent>
             </Select>
-            <Button onClick={handleGenerate} data-testid="button-generate-comparison">
+            <Button onClick={handleGenerate} className="w-full md:w-auto" data-testid="button-generate-comparison">
               Generate Comparison
             </Button>
           </div>
@@ -114,7 +114,7 @@ export function ComparisonGraph({ isLoading }: ComparisonGraphProps) {
       </CardHeader>
       <CardContent>
         {/* Comparison Chart */}
-        <div className="h-80" data-testid="comparison-chart">
+        <div className="h-64 sm:h-80" data-testid="comparison-chart">
           <ResponsiveContainer width="100%" height="100%">
             {chartType === 'line' ? (
               <LineChart data={comparisonData}>
@@ -167,7 +167,7 @@ export function ComparisonGraph({ isLoading }: ComparisonGraphProps) {
         </div>
         
         {/* Metric Summary Badges */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6" data-testid="comparison-summary">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6" data-testid="comparison-summary">
           <Card className="bg-secondary">
             <CardContent className="p-4 text-center">
               <p className="text-sm text-muted-foreground">Current Period</p>

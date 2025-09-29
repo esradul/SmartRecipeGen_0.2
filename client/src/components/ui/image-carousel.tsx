@@ -24,7 +24,7 @@ export function ImageCarousel({ images, onImageClick }: ImageCarouselProps) {
 
   return (
     <div className="relative">
-      <div className="flex space-x-4 overflow-x-auto pb-4 image-carousel" data-testid="image-carousel">
+      <div className="flex space-x-2 sm:space-x-4 overflow-x-auto pb-4 image-carousel" data-testid="image-carousel">
         {images.map((imageUrl, index) => (
           <div
             key={index}
@@ -34,34 +34,34 @@ export function ImageCarousel({ images, onImageClick }: ImageCarouselProps) {
             <img
               src={imageUrl}
               alt={`Attachment ${index + 1}`}
-              className="w-64 h-48 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
+              className="w-48 h-36 sm:w-64 sm:h-48 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
               onClick={() => onImageClick?.(imageUrl)}
               data-testid={`image-carousel-image-${index}`}
             />
             <Button
               size="sm"
               variant="secondary"
-              className="absolute top-2 right-2 bg-black/50 text-white hover:bg-black/75 w-8 h-8 p-0"
+              className="absolute top-1 right-1 sm:top-2 sm:right-2 bg-black/50 text-white hover:bg-black/75 w-6 h-6 sm:w-8 sm:h-8 p-0"
               onClick={() => onImageClick?.(imageUrl)}
               data-testid={`button-expand-image-${index}`}
             >
-              <Expand className="w-4 h-4" />
+              <Expand className="w-3 h-3 sm:w-4 sm:h-4" />
             </Button>
           </div>
         ))}
       </div>
       
       {images.length > 1 && (
-        <div className="flex justify-center items-center space-x-4 mt-4">
+        <div className="flex justify-center items-center space-x-2 sm:space-x-4 mt-4">
           <Button
             size="sm"
             variant="outline"
             onClick={goToPrevious}
             data-testid="button-previous-image"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4" />
           </Button>
-          <span className="text-sm text-muted-foreground" data-testid="text-image-counter">
+          <span className="text-xs sm:text-sm text-muted-foreground" data-testid="text-image-counter">
             {currentIndex + 1} of {images.length}
           </span>
           <Button
@@ -70,7 +70,7 @@ export function ImageCarousel({ images, onImageClick }: ImageCarouselProps) {
             onClick={goToNext}
             data-testid="button-next-image"
           >
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
           </Button>
         </div>
       )}

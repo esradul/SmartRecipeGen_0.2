@@ -15,7 +15,7 @@ export function PieCharts({ permissionData, statusData, isLoading }: PieChartsPr
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6 mb-6">
         {Array.from({ length: 2 }).map((_, index) => (
           <Card key={index} data-testid={`skeleton-chart-${index}`}>
             <CardHeader>
@@ -31,14 +31,14 @@ export function PieCharts({ permissionData, statusData, isLoading }: PieChartsPr
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6" data-testid="pie-charts">
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6 mb-6" data-testid="pie-charts">
       {/* Permission Status Pie Chart */}
       <Card data-testid="card-permission-chart">
         <CardHeader>
           <CardTitle>Permission Status</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-64">
+          <div className="h-48 sm:h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -61,12 +61,12 @@ export function PieCharts({ permissionData, statusData, isLoading }: PieChartsPr
           </div>
           <div className="mt-4 space-y-2" data-testid="permission-legend">
             {permissionData.map((item) => (
-              <div key={item.name} className="flex items-center justify-between">
+              <div key={item.name} className="flex items-center justify-between gap-2">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
-                  <span className="text-sm text-foreground">{item.name}</span>
+                  <span className="text-sm text-foreground truncate">{item.name}</span>
                 </div>
-                <span className="text-sm font-medium" data-testid={`text-permission-${item.name.toLowerCase().replace(' ', '-')}`}>
+                <span className="text-sm font-medium shrink-0" data-testid={`text-permission-${item.name.toLowerCase().replace(' ', '-')}`}>
                   {item.value.toLocaleString()} ({item.percentage}%)
                 </span>
               </div>
@@ -81,7 +81,7 @@ export function PieCharts({ permissionData, statusData, isLoading }: PieChartsPr
           <CardTitle>Overall Status</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="h-64">
+          <div className="h-48 sm:h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -104,12 +104,12 @@ export function PieCharts({ permissionData, statusData, isLoading }: PieChartsPr
           </div>
           <div className="mt-4 space-y-2" data-testid="status-legend">
             {statusData.map((item) => (
-              <div key={item.name} className="flex items-center justify-between">
+              <div key={item.name} className="flex items-center justify-between gap-2">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
-                  <span className="text-sm text-foreground">{item.name}</span>
+                  <span className="text-sm text-foreground truncate">{item.name}</span>
                 </div>
-                <span className="text-sm font-medium" data-testid={`text-status-${item.name.toLowerCase().replace(' ', '-')}`}>
+                <span className="text-sm font-medium shrink-0" data-testid={`text-status-${item.name.toLowerCase().replace(' ', '-')}`}>
                   {item.value.toLocaleString()} ({item.percentage}%)
                 </span>
               </div>

@@ -121,10 +121,10 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
   return (
     <>
       <Card data-testid={`card-sendguard-${record.id}`}>
-        <CardContent className="p-6 space-y-4">
+        <CardContent className="p-4 lg:p-6 space-y-4">
           {/* Email Subject */}
           <div className="border-b border-border pb-4">
-            <h3 className="text-lg font-semibold text-foreground" data-testid="text-email-subject">
+            <h3 className="text-base lg:text-lg font-semibold text-foreground break-words" data-testid="text-email-subject">
               {record.email_subject || 'No Subject'}
             </h3>
             {record.edited && Number(record.edited) > 0 && (
@@ -136,7 +136,7 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
 
           {/* Feedback Alert */}
           {record.feedback && (
-            <div className="bg-accent/10 border border-accent/20 rounded-lg p-4" data-testid="alert-feedback">
+            <div className="bg-accent/10 border border-accent/20 rounded-lg p-3 lg:p-4" data-testid="alert-feedback">
               <div className="flex items-start space-x-3">
                 <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
                 <div>
@@ -151,7 +151,7 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
           <div className="space-y-4">
             <div>
               <h4 className="font-medium text-foreground mb-2">Previous Emails Summary</h4>
-              <div className="bg-muted rounded-lg p-4" data-testid="text-previous-emails">
+              <div className="bg-muted rounded-lg p-3 lg:p-4" data-testid="text-previous-emails">
                 <p className="text-sm text-muted-foreground">
                   {record.Previous_Emails_Summary || 'No previous emails summary available.'}
                 </p>
@@ -160,7 +160,7 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
 
             <div>
               <h4 className="font-medium text-foreground mb-2">Customer Email</h4>
-              <div className="bg-muted rounded-lg p-4" data-testid="text-customer-email">
+              <div className="bg-muted rounded-lg p-3 lg:p-4" data-testid="text-customer-email">
                 <p className="text-sm text-foreground">
                   {record.Customer_Email || 'No customer email content available.'}
                 </p>
@@ -180,7 +180,7 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
 
             <div>
               <h4 className="font-medium text-foreground mb-2">Thought Process</h4>
-              <div className="bg-muted rounded-lg p-4" data-testid="text-thought-process">
+              <div className="bg-muted rounded-lg p-3 lg:p-4" data-testid="text-thought-process">
                 <p className="text-sm text-muted-foreground">
                   {record.thought_process || 'No thought process available.'}
                 </p>
@@ -216,7 +216,7 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
                       CRM Notes
                     </AccordionTrigger>
                     <AccordionContent>
-                      <div className="bg-muted rounded-lg p-4" data-testid="text-crm-notes">
+                      <div className="bg-muted rounded-lg p-3 lg:p-4" data-testid="text-crm-notes">
                         <p className="text-sm text-muted-foreground">
                           {record.CRM_notes || 'No CRM notes available.'}
                         </p>
@@ -227,8 +227,8 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
 
                 {/* Action Controls */}
                 <div className="border-t border-border pt-4">
-                  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between space-y-4 sm:space-y-0 sm:space-x-4">
-                    <div className="flex flex-col sm:flex-row sm:items-end space-y-4 sm:space-y-0 sm:space-x-4">
+                  <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between space-y-4 lg:space-y-0 lg:space-x-4">
+                    <div className="flex flex-col md:flex-row md:items-end space-y-4 md:space-y-0 md:space-x-4">
                       <FormField
                         control={form.control}
                         name="action"
@@ -237,7 +237,7 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
                             <FormLabel>Action</FormLabel>
                             <Select onValueChange={field.onChange} defaultValue={field.value}>
                               <FormControl>
-                                <SelectTrigger className="w-48" data-testid="select-action">
+                                <SelectTrigger className="w-full md:w-48" data-testid="select-action">
                                   <SelectValue placeholder="Select action..." />
                                 </SelectTrigger>
                               </FormControl>
@@ -264,7 +264,7 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
                                 <Input
                                   {...field}
                                   placeholder="Required for Objection/Manual Handle"
-                                  className="w-64"
+                                  className="w-full md:w-64"
                                   data-testid="input-feedback"
                                 />
                               </FormControl>
@@ -278,6 +278,7 @@ export function SendGuardCard({ record, onUpdate }: SendGuardCardProps) {
                     <Button
                       type="submit"
                       disabled={isSubmitting || !watchedAction}
+                      className="w-full lg:w-auto"
                       data-testid="button-process"
                     >
                       {isSubmitting ? 'Processing...' : 'Process'}
