@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Bot, AlertCircle } from "lucide-react";
+import { Bot, CircleAlert as AlertCircle } from "lucide-react";
 import { authSupabase } from "@/lib/supabase-auth";
 import { useLocation } from "wouter";
 

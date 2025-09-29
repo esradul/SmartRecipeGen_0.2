@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User, Settings, Trash2, LogOut, Sliders } from 'lucide-react';
+import { User, Settings, Trash2, LogOut, FileSliders as Sliders } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,

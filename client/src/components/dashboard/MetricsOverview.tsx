@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Mail, Send, CheckCircle, AlertTriangle } from 'lucide-react';
+import { TrendingUp, TrendingDown, Mail, Send, CircleCheck as CheckCircle, TriangleAlert as AlertTriangle } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import type { Metrics } from '@/types/database';
 

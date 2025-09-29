@@ -1,15 +1,7 @@
-import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { 
   Home, 
-  ShieldCheck, 
-  MessageSquare, 
-  AlertTriangle, 
-  Star,
-  Bot
-} from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+  ShieldCheck, import { Chrome as Home, ShieldCheck, MessageSquare, TriangleAlert as AlertTriangle, Star, Bot } from 'lucide-react'nts/ui/badge';
 import { useSupabaseData } from '@/hooks/useSupabaseData';
 import { useSupabase } from '@/contexts/SupabaseProvider';
 
